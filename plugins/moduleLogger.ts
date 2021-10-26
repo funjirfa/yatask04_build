@@ -19,6 +19,9 @@ function getFilesSync(dir: string, result: string[] = []): string[] {
     const subDirs = fs.readdirSync(dir);
     subDirs.forEach((subDir: string) => {
         const source = resolve(dir, subDir);
+        if (source.endsWith('index.html')) {
+            return;
+        }
         if (fs.statSync(source).isDirectory()) {
             getFilesSync(source, result);
         } else {
